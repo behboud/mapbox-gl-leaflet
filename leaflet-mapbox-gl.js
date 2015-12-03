@@ -66,14 +66,9 @@ L.MapboxGL = L.Class.extend({
             topLeft = this._map.containerPointToLayerPoint([0, 0]);
 
         L.DomUtil.setPosition(container, topLeft);
-        
-        var center = this._map.getCenter();
-
-        // gl.setView([center.lat, center.lng], this._map.getZoom() - 1, 0);
-        // calling setView directly causes sync issues because it uses requestAnimFrame
 
         var tr = gl.transform;
-        tr.center = mapboxgl.LngLat.convert([center.lng, center.lat]);
+        tr.center = this._map.getCenter();
         tr.zoom = this._map.getZoom() - 1;
 
         if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
